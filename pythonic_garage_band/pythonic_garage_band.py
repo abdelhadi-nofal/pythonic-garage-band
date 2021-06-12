@@ -1,83 +1,133 @@
 from abc import abstractmethod, ABC
 
-class Band:
-    members=[]
-    def __init__(self, name, members):
-        self.name = name
-        self.members = members
-        Band.members.append(members)
-        
-    
-    def play_solos(self):
-        for i in Band.members:
-            return f"{i.play_solos()}plays solo!"
-
-    
-    def to_list(self,cls):
-        return cls.members
-
-    def __str__(self):
-        return f"Band {self.name}"
-    
-    def __repr__(self):
-        return f" '{self.name}' "
-        
 
 class Musician():
-        
-    def __init__(self,name):
-        self.name=name
-    
-    @abstractmethod
-    def __str__(self):
-        pass
+        members = []
 
-    def __repr__(self):
-        pass
+        def __init__(self,name):
+            self.name=name
+            Musician.members.append(self.name)
+
+        @abstractmethod  
+
+        def __str__(self):
+            pass
+        
+        def __repr__(self):
+           pass
+        
+
+        def get_instrument(self):
+            pass
+        
+
+        def play_solo(self):
+            pass
+
+        
+class Band(Musician):
+
     
-    def play_solo(self):
-        pass
+    instances=[]
+
+
+    def __init__(self,name,members):
+        
+        self.name=name
+        # super().__init__(members)
+        self.members=members
+        Band.instances.append(self)
+
+
+        
+        
+    def play_solos(self):
+        solos=[]
+        for i in self.members:
+             solos.append(i.play_solo())
+        return solos
+
+    
+    def __str__(self):
+        return f'Our band is {self.name}'
+    def __repr__(self):
+
+        return f"Band instance. Name = {self.name}"
+
+    @classmethod
+
+    def to_list(cls) :
+        return cls.instances   
 
 class Guitarist(Musician):
-
     def __init__(self,name):
         super().__init__(name)
-
+    
     def __str__(self):
-        return f"Guitarist {self.name}"
-    
+        return f"My name is {self.name} and I play guitar"
     def __repr__(self):
-        return f" '{self.name}' "
-    
-    def get_instrument(self):
-        return (f'{self.name} is a Guitarist')
+        return f"Guitarist instance. Name = {self.name}"
+
+        
+
+    @staticmethod
+    def get_instrument():
+        return "guitar"
+    @staticmethod
+    def play_solo():
+        return "face melting guitar solo"  
+
+
+class Drummer(Musician):
+    def __init__(self,name):
+        super().__init__(name)
+    def __str__(self):
+        return f"My name is {self.name} and I play drums"
+    def __repr__(self):
+        return f"Drummer instance. Name = {self.name}"
+    @staticmethod
+    def get_instrument():
+        return "drums"
+    @staticmethod
+    def play_solo():
+        return "rattle boom crash"
     
 
 class Bassist(Musician):
-
     def __init__(self,name):
         super().__init__(name)
-
     def __str__(self):
-        return f"Bassist {self.name}"
-    
+        return f"My name is {self.name} and I play bass"
     def __repr__(self):
-        return f" '{self.name}' "
+        return f"Bassist instance. Name = {self.name}"
+    @staticmethod
+    def get_instrument():
+        return "bass"
+    @staticmethod
+    def play_solo():
+        return "bom bom buh bom"
 
-    def get_instrument(self,name):
-        return (f'{self.name} is a Bassist')
+
+
+
+if __name__ == "__main__":
+#     heros = Band('heros',members=['Jhon','Devid','Lionel'])
+#     fluffy = Band('fluffy',["fsa",'sdfds','dsfds'])
+    Jhon = Guitarist('Jhon')
+    Devid=Drummer('Devid')
+    Lionel = Bassist('Lionel')
     
-
-class Drummer(Musician):
-
-    def __init__(self,name):
-        super().__init__(name)
-
-    def __str__(self):
-        return f"Drummer {self.name}"
+print(Musician.members)    
+#     print(Devid.play_solo())
+#     print(Jhon.play_solo())
+#     print(Lionel.play_solo())
+   
     
-    def __repr__(self):
-        return f" '{self.name}' "
+#     print(Band.bandslist)
+#     print(fluffy.members)
+#     print(heros.members)
+#     print(fluffy.to_list())
 
-    def get_instrument(self):
-        return (f'{self.name} is a Drummer')       
+#     print(Jhon.get_instrument())
+#     print(Devid.get_instrument())
+#     print(Lionel.get_instrument())
