@@ -1,31 +1,6 @@
 from abc import abstractmethod, ABC
 
-
-class Musician():
-        members = []
-
-        def __init__(self,name):
-            self.name=name
-            Musician.members.append(self.name)
-
-        @abstractmethod  
-
-        def __str__(self):
-            pass
-        
-        def __repr__(self):
-           pass
-        
-
-        def get_instrument(self):
-            pass
-        
-
-        def play_solo(self):
-            pass
-
-        
-class Band(Musician):
+class Band:
 
     
     instances=[]
@@ -34,7 +9,6 @@ class Band(Musician):
     def __init__(self,name,members):
         
         self.name=name
-        # super().__init__(members)
         self.members=members
         Band.instances.append(self)
 
@@ -58,6 +32,33 @@ class Band(Musician):
 
     def to_list(cls) :
         return cls.instances   
+
+
+class Musician:
+        members = []
+
+        def __init__(self,name):
+            self.name=name
+            Musician.members.append(self.name)
+
+        @abstractmethod  
+
+        def __str__(self):
+            pass
+        
+        def __repr__(self):
+           pass
+        
+
+        def get_instrument(self):
+            pass
+        
+
+        def play_solo(self):
+            pass
+
+        
+
 
 class Guitarist(Musician):
     def __init__(self,name):
@@ -110,14 +111,14 @@ class Bassist(Musician):
 
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 #     heros = Band('heros',members=['Jhon','Devid','Lionel'])
 #     fluffy = Band('fluffy',["fsa",'sdfds','dsfds'])
-    Jhon = Guitarist('Jhon')
-    Devid=Drummer('Devid')
-    Lionel = Bassist('Lionel')
+#     Jhon = Guitarist('Jhon')
+#     Devid=Drummer('Devid')
+#     Lionel = Bassist('Lionel')
     
-print(Musician.members)    
+#     print(Musician.members)    
 #     print(Devid.play_solo())
 #     print(Jhon.play_solo())
 #     print(Lionel.play_solo())
@@ -131,3 +132,5 @@ print(Musician.members)
 #     print(Jhon.get_instrument())
 #     print(Devid.get_instrument())
 #     print(Lionel.get_instrument())
+
+
